@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Messages manager{% endblock %}
+
+{% block content %}
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand">Your messages</a>
+          <a class="btn btn-outline-light col-2" href="{% url 'mailer:home' %}">Reports</a>
+          <a class="btn btn-outline-light col-2" href="{% url 'mailer:manage' %}">Distributions</a>
+          <a class="btn btn-outline-info col-2" href="{% url 'mailer:create_message' %}">New message</a>
+          <a class="btn btn-outline-danger " href="{% url 'logout' %}">Log out</a>
+      </div>
+      </nav>
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+  {% for message in message_list %}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="{{ message.title }}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-{{ message.title }}" aria-expanded="false" aria-controls="flush-{{ message.title }}">
+        {{ message.title }}
+      </button>
+    </h2>
+    <div id="flush-{{ message.title }}" class="accordion-collapse collapse" aria-labelledby="flush-{{ message.title }}" data-bs-parent="#accordionFlushExample">
+        <p></p>
+      <a type="button" href="{% url 'mailer:message_update' message.pk %}" class="btn btn-outline-light">Edit</a>
+      <a type="button" href="{% url 'mailer:message_delete' message.pk %}" class="btn btn-outline-danger">Delete</a>
+      <p></p>
+    </div>
+  </div>
+  {% empty %}
+            <div class="card text-bg-light position-absolute top-50 start-50 translate-middle">
+                <div class="card-text height fs-5">Here`s empty yet</div>
+            </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "django-mailer"
+version = "0.1.0"
+description = ""
+authors = ["DaniilMashkov <dankeeeez@gmail.com>"]
+readme = "README.md"
+packages = [{include = "django_mailer"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.1.5"
+psycopg2-binary = "^2.9.5"
+django-crispy-forms = "^1.14.0"
+django-crontab = "^0.7.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

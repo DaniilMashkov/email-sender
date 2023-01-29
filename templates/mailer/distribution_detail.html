@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Distribution detail{% endblock %}
+
+{% block content %}
+
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand">Distribution detail</a>
+          <a class="btn btn-outline-light col-2" href="{% url 'mailer:manage' %}">Back to distributions</a>
+          <a class="btn btn-outline-danger " href="{% url 'logout' %}">Log out</a>
+      </div>
+    </nav>
+
+    <table class="table table-hover table-responsive-xxl">
+      <thead>
+        <tr>
+          <th scope="col">Send time</th>
+          <th scope="col">Periodicity</th>
+          <th scope="col">Status</th>
+          <th scope="col">Recipients</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+
+      <tr>
+          <td>{{ distribution.timer }}</td>
+          <td>{{ distribution.periodicity }}</td>
+          <td>{{ distribution.status }}</td>
+          <td >
+              {% for recipient in object.recipients.all %}
+              / {{ recipient.address }} /
+                {% endfor %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+{% endblock %}

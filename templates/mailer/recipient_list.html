@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Recipients{% endblock %}
+
+{% block content %}
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand">Your recipients</a>
+          <a class="btn btn-outline-light col-2" href="{% url 'mailer:home' %}">Reports</a>
+          <a class="btn btn-outline-light col-2" href="{% url 'mailer:manage' %}">Distributions</a>
+          <a class="btn btn-outline-info" href="{% url 'mailer:create_recipient' %}">Add recipient</a>
+          <a class="btn btn-outline-danger " href="{% url 'logout' %}">Log out</a>
+      </div>
+      </nav>
+    <table class="table table-hover table-responsive-xxl">
+      <thead>
+        <tr>
+          <th scope="col">Recipient`s email</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+          {% for recipient in recipient_list %}
+      <tr>
+          <td>{{ recipient.address }}</td>
+          <td >
+              <a class="btn btn-outline-light" href="{% url 'mailer:recipient_update' recipient.pk %}">Edit</a>
+              <a class="btn btn-outline-danger" href="{% url 'mailer:recipient_delete' recipient.pk %}">Delete</a>
+          </td>
+        </tr>
+      {% empty %}
+            <div class="card text-bg-light position-absolute top-50 start-50 translate-middle">
+                <div class="card-text height fs-5">Here`s empty yet</div>
+            </div>
+      {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

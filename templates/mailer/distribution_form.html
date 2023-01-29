@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Distribution{% endblock %}
+
+{% block content %}
+<form method="post" class="row-cols-3">
+
+{% csrf_token %}
+
+    <div class="card text-center position-absolute top-50 start-50 translate-middle">
+      <div class="card-header"> distribution
+          <style>
+                ::-webkit-scrollbar { width: 0; height: 0; }
+          </style>
+        {{ form|crispy }}
+      </div>
+      <div class="card-body gap-5" role="group" aria-label="Basic outlined example">
+          <div class="row-cols-3">
+          <button type="submit" class="btn btn-outline-light">Apply</button>
+          <a class="btn btn-outline-danger" href="{% url 'mailer:manage' %}">Discard</a>
+          </div>
+      </div>
+    </div>
+</form>
+
+{% endblock %}

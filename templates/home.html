@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Mailman{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand">Your Reports</a>
+      <a class="btn btn-outline-light col-2 position-absolute end-50" href="{% url 'mailer:manage' %}">Manage your distributions</a>
+      <a class="btn btn-outline-danger " href="{% url 'logout' %}">Log out</a>
+  </div>
+  </nav>
+    <table class="table table-hover table-sm w-75">
+      <thead>
+        <tr>
+          {% for response in report_list %}
+          <th scope="col">Last send</th>
+          <th scope="col">Status</th>
+          <th scope="col">Response</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr>
+          <td>{{ response.time|date:'d.m.y | H:i:s' }}</td>
+          <td>{{ response.status }}</td>
+          <td>{{ response.response }}</td>
+          {% empty %}
+            <div class="card text-bg-light position-absolute top-50 start-50 translate-middle">
+                <div class="card-text height fs-5">Here`s empty yet</div>
+            </div>
+        </tr>
+      </tbody>
+    </table>
+{% endfor %}
+{% else %}
+
+<div class="card text-center position-absolute top-50 start-50 translate-middle" >
+  <div class="card-body">
+    <p class="card-text height fs-5">You are not logged in</p>
+    <a class="btn btn-outline-primary btn-lg" href="{% url 'login' %}">Log in</a>
+    <a class="btn btn-outline-primary btn-lg" href="{% url 'signup' %}">Sign Up</a>
+  </div>
+</div>
+
+{% endif %}
+{% endblock %}

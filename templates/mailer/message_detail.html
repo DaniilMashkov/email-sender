@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Message detail{% endblock %}
+
+{% block content %}
+
+    <div class="card text-center position-absolute top-50 start-50 translate-middle">
+
+      <div class="card-header"> {{ message.title }}</div>
+      <div class="card-text">{{ message.body }}</div>
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+          <a class="btn btn-outline-danger" href="{% url 'mailer:messages' %}">Back</a>
+      </div>
+
+{% endblock %}
