@@ -1,4 +1,4 @@
-from mailer.models import Distribution, Message, Report
+from mailer.models import Distribution, Report
 from datetime import datetime
 from config.settings import EMAIL_HOST_USER
 from django.core.management import BaseCommand
@@ -10,6 +10,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         distibutions = Distribution.objects.filter(timer=datetime.now().strftime('%H:%M:00'))
+        # distibutions = Distribution.objects.all()
 
         for distribution in distibutions:
             distribution.status = 'started'

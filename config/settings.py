@@ -120,5 +120,5 @@ EMAIL_USE_SSL = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 CRONJOBS = [
-    ('*/1 * * * *', 'django.core.management.call_command', ['start_delivery'])
+    ('*/1 * * * *', 'django.core.management.call_command', ['start_delivery'], {'cron':0})
 ]
